@@ -1,9 +1,4 @@
-﻿#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-#include <limits>
-#include <chrono>
+﻿#include "utils.h"
 
 using namespace std;
 
@@ -29,7 +24,8 @@ void printAlgorithmMenu(int startPoint, int endPoint)
 		<< "[3] Floyd algorithm" << endl
 		<< "[4] Change start point" << endl
 		<< "[5] Change end point" << endl
-		<< "[0] Back to menu" << endl;
+		<< "[0] Back to menu" << endl
+		<< "Choose action: ";
 }
 
 void clearStream()
@@ -83,12 +79,12 @@ vector<vector <int>> loadMatrix(ifstream& fin)
 void saveMatrix(const vector<vector <int>>& matrix, ofstream& fout)
 {
 	int n = size(matrix);
-	fout << n;
+	fout << n << endl;
 
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 		{
-			fout << matrix[i][j];
+			fout << matrix[i][j] << endl;
 		}
 
 }
@@ -125,13 +121,13 @@ vector<vector <int>> createMatrix()
 
 int selectStartPoint(int size)
 {
-	cout << "Select starting point (from 0 to " << size - 1 << ")";
+	cout << "Select starting point (from 0 to " << size - 1 << "): ";
 	return inputNumber(0, size - 1);
 }
 
 int selectEndPoint(int size)
 {
-	cout << "Select end point (from 0 to " << size - 1 << ")";
+	cout << "Select end point (from 0 to " << size - 1 << "): ";
 	return inputNumber(0, size - 1);
 }
 
@@ -150,7 +146,7 @@ int findShortcut(const vector<vector <int>>& matrix)
 		{
 			auto start = chrono::system_clock::now();
 
-			//algorithmDijkstra();
+			//algorithmDijkstra(matrix, startPoint, endPoint);
 
 			auto finish = chrono::system_clock::now();
 			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
@@ -161,7 +157,7 @@ int findShortcut(const vector<vector <int>>& matrix)
 		{
 			auto start = chrono::system_clock::now();
 
-			//algorithmFord();
+			//algorithmFord(matrix, startPoint, endPoint);
 
 			auto finish = chrono::system_clock::now();
 			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
@@ -172,7 +168,7 @@ int findShortcut(const vector<vector <int>>& matrix)
 		{
 			auto start = chrono::system_clock::now();
 
-			//algorithmFloyd();
+			//algorithmFloyd(matrix, startPoint, endPoint);
 
 			auto finish = chrono::system_clock::now();
 			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
