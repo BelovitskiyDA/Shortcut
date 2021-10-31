@@ -12,7 +12,8 @@ void printMainMenu()
 		<< "[1] Load weights matrix" << endl
 		<< "[2] Create weights matrix" << endl
 		<< "[3] Save weights matrix" << endl
-		<< "[4] Finding shortcut" << endl
+		<< "[4] Print weights matrix" << endl
+		<< "[5] Finding shortcut" << endl
 		<< "[0] Exit" << endl
 		<< "Choose action: ";
 }
@@ -110,7 +111,7 @@ vector<vector <int>> createMatrix()
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 		{
-			cout << "Element [" << i << "][" << j << "]: ";
+			cout << "Element [" << i+1 << "][" << j+1 << "]: ";
 			matrix[i][j] = inputNumber(INT_MIN, INT_MAX);
 		}
 
@@ -123,22 +124,88 @@ int main()
 
 	while (true)
 	{
-		cout << "File name of the weights matrix load: ";
-		string fileName = inputFileName();
-		ifstream fin;
-		fin.open("matrix base\\" + fileName, ios::in);
-		if (fin.is_open())
+		printMainMenu();
+		switch (inputNumber(0, 5))
 		{
-			matrix = loadMatrix(fin);
-			printMatrix(matrix);
+		case 1:
+		{
+			cout << "File name of the weights matrix load: ";
+			string fileName = inputFileName();
+			ifstream fin;
+			fin.open("matrix base\\" + fileName, ios::in);
+			if (fin.is_open())
+			{
+				matrix = loadMatrix(fin);
+				cout << "Successfull load" << endl;
+			}
+			else
+			{
+				cout << "Error of weights matrix load." << endl;
+			}
+			fin.close();
 
-			cout << "Successfull load" << endl;
+			break;
 		}
-		else
+		case 2:
 		{
-			cout << "Error of weights matrix load. Try again." << endl;
+			matrix = createMatrix();
+
+			break;
 		}
-		fin.close();
+		case 3:
+		{
+			if (size(matrix))
+			{
+				cout << "File name of the weights matrix save: ";
+				string fileName = inputFileName();
+				ofstream fout;
+				fout.open("matrix base\\" + fileName, ios::out);
+				if (fout.is_open())
+				{
+					saveMatrix(matrix, fout);
+					cout << "Successfull save" << endl;
+				}
+				else
+				{
+					cout << "Error of weights matrix save." << endl;
+				}
+				fout.close();
+				
+			}
+			else
+			{
+				cout << "Error: matrix not create" << endl;
+			}
+			break;
+		}
+		case 4:
+		{
+			if (size(matrix))
+			{
+				printMatrix(matrix);
+			}
+			else
+			{
+				cout << "Error: matrix not create" << endl;
+			}
+			break;
+		}
+		case 5:
+		{
+
+			break;
+		}
+		case 0:
+		{
+			return 0;
+		}
+		default:
+		{
+			cout << "Wrong action" << endl;
+			clearStream();
+			break;
+		}
+		}	
 	}
 
 	return 0;
