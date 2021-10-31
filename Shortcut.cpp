@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <limits>
+#include <chrono>
 
 using namespace std;
 
@@ -147,17 +148,35 @@ int findShortcut(const vector<vector <int>>& matrix)
 		{
 		case 1:
 		{
+			auto start = chrono::system_clock::now();
+
 			//algorithmDijkstra();
+
+			auto finish = chrono::system_clock::now();
+			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
+			cout << "Algorithm running time (milliseconds): " << duration << endl;
 			break;
 		}
 		case 2:
 		{
+			auto start = chrono::system_clock::now();
+
 			//algorithmFord();
+
+			auto finish = chrono::system_clock::now();
+			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
+			cout << "Algorithm running time (milliseconds): " << duration << endl;
 			break;
 		}
 		case 3:
 		{
+			auto start = chrono::system_clock::now();
+
 			//algorithmFloyd();
+
+			auto finish = chrono::system_clock::now();
+			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
+			cout << "Algorithm running time (milliseconds): " << duration << endl;
 			break;
 		}
 		case 4:
