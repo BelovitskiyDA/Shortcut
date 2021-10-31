@@ -18,13 +18,17 @@ void printMainMenu()
 		<< "Choose action: ";
 }
 
-void printAlgorithmMenu()
+void printAlgorithmMenu(int startPoint, int endPoint)
 {
 	cout << "....................." << endl
+		<< "Start point: " << startPoint << ". End point: " << endPoint << endl
 		<< "Choose algorithm:" << endl
 		<< "[1] Dijkstra algorithm" << endl
 		<< "[2] Ford - Bellman algorithm" << endl
-		<< "[3] Floyd algorithm" << endl;
+		<< "[3] Floyd algorithm" << endl
+		<< "[4] Change start point" << endl
+		<< "[5] Change end point" << endl
+		<< "[0] Back to menu" << endl;
 }
 
 void clearStream()
@@ -111,11 +115,73 @@ vector<vector <int>> createMatrix()
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 		{
-			cout << "Element [" << i+1 << "][" << j+1 << "]: ";
+			cout << "Element [" << i << "][" << j << "]: ";
 			matrix[i][j] = inputNumber(INT_MIN, INT_MAX);
 		}
 
 	return matrix;
+}
+
+int selectStartPoint(int size)
+{
+	cout << "Select starting point (from 0 to " << size - 1 << ")";
+	return inputNumber(0, size - 1);
+}
+
+int selectEndPoint(int size)
+{
+	cout << "Select end point (from 0 to " << size - 1 << ")";
+	return inputNumber(0, size - 1);
+}
+
+int findShortcut(const vector<vector <int>>& matrix)
+{
+	int n = size(matrix);
+	int startPoint = selectStartPoint(n);
+	int endPoint = selectEndPoint(n);
+
+	while (true)
+	{
+		printAlgorithmMenu(startPoint, endPoint);
+		switch (inputNumber(0, 5))
+		{
+		case 1:
+		{
+			//algorithmDijkstra();
+			break;
+		}
+		case 2:
+		{
+			//algorithmFord();
+			break;
+		}
+		case 3:
+		{
+			//algorithmFloyd();
+			break;
+		}
+		case 4:
+		{
+			startPoint = selectStartPoint(n);
+			break;
+		}
+		case 5:
+		{
+			endPoint = selectEndPoint(n);
+			break;
+		}
+		case 0:
+		{
+			return 0;
+		}
+		default:
+		{
+			cout << "Wrong action" << endl;
+			clearStream();
+			break;
+		}
+		}
+	}
 }
 
 int main()
@@ -192,7 +258,14 @@ int main()
 		}
 		case 5:
 		{
-
+			if (size(matrix))
+			{
+				findShortcut(matrix);
+			}
+			else
+			{
+				cout << "Error: matrix not create" << endl;
+			}
 			break;
 		}
 		case 0:
