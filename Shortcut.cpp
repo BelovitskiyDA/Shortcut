@@ -52,6 +52,25 @@ int inputNumber(int min, int max)
 	}
 }
 
+double inputNumber(double min, double max)
+{
+	double x = 0;
+
+	while (true)
+	{
+		cin >> x;
+		if(!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
+		{
+			return x;
+		}
+		else
+		{
+			return HUGE_VAL;
+			clearStream();
+		}
+	}
+}
+
 string inputFileName()
 {
 	string fileName;
@@ -61,11 +80,11 @@ string inputFileName()
 	return fileName;
 }
 
-vector<vector <int>> loadMatrix(ifstream& fin)
+vector<vector <double>> loadMatrix(ifstream& fin)
 {
 	int n;
 	fin >> n;
-	vector<vector <int>> matrix(n, vector <int>(n));
+	vector<vector <double>> matrix(n, vector <double>(n));
 
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
@@ -76,7 +95,7 @@ vector<vector <int>> loadMatrix(ifstream& fin)
 	return matrix;
 }
 
-void saveMatrix(const vector<vector <int>>& matrix, ofstream& fout)
+void saveMatrix(const vector<vector <double>>& matrix, ofstream& fout)
 {
 	int n = size(matrix);
 	fout << n << endl;
@@ -89,7 +108,7 @@ void saveMatrix(const vector<vector <int>>& matrix, ofstream& fout)
 
 }
 
-void printMatrix(const vector<vector <int>> &matrix)
+void printMatrix(const vector<vector <double>>&matrix)
 {
 	int n = size(matrix);
 	for (int i = 0; i < n; i++)
@@ -102,18 +121,19 @@ void printMatrix(const vector<vector <int>> &matrix)
 	}	
 }
 
-vector<vector <int>> createMatrix()
+vector<vector <double>> createMatrix()
 {
 	int n;
 	cout << "input size n of matrix: ";
 	n = inputNumber(1, INT_MAX);
-	vector<vector <int>> matrix(n, vector <int>(n));
+	vector<vector <double>> matrix(n, vector <double>(n));
 
+	//need prompt about inf
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 		{
 			cout << "Element [" << i << "][" << j << "]: ";
-			matrix[i][j] = inputNumber(INT_MIN, INT_MAX);
+			matrix[i][j] = inputNumber(DBL_MIN, DBL_MAX);
 		}
 
 	return matrix;
@@ -131,7 +151,7 @@ int selectEndPoint(int size)
 	return inputNumber(0, size - 1);
 }
 
-int findShortcut(const vector<vector <int>>& matrix)
+int findShortcut(const vector<vector <double>>& matrix)
 {
 	int n = size(matrix);
 	int startPoint = selectStartPoint(n);
@@ -201,7 +221,7 @@ int findShortcut(const vector<vector <int>>& matrix)
 
 int main()
 {
-	vector<vector <int>> matrix;
+	vector<vector <double>> matrix;
 
 	while (true)
 	{
