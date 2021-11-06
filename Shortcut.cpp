@@ -185,6 +185,34 @@ int selectEndPoint(int size)
 	return inputNumber(0, size - 1);
 }
 
+using Algorithm = void(*)(vector<vector <double>> matrix, int startPoint, int endPoint);
+
+void algorithmDijkstra(vector<vector <double>> matrix, int startPoint, int endPoint)
+{
+	cout << "algorithmDijkstra" << endl;
+}
+
+void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
+{
+	cout << "algorithmFord" << endl;
+}
+
+void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
+{
+	cout << "algorithmFloyd" << endl;
+}
+
+void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint, int endPoint)
+{
+	auto start = chrono::system_clock::now();
+
+	f(matrix, startPoint, endPoint);
+
+	auto finish = chrono::system_clock::now();
+	auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
+	cout << "Algorithm running time (milliseconds): " << duration << endl;
+}
+
 int findShortcut(const vector<vector <double>>& matrix)
 {
 	int n = size(matrix);
@@ -198,35 +226,17 @@ int findShortcut(const vector<vector <double>>& matrix)
 		{
 		case 1:
 		{
-			auto start = chrono::system_clock::now();
-
-			//algorithmDijkstra(matrix, startPoint, endPoint);
-
-			auto finish = chrono::system_clock::now();
-			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
-			cout << "Algorithm running time (milliseconds): " << duration << endl;
+			startAlgorithm(algorithmDijkstra, matrix, startPoint, endPoint);
 			break;
 		}
 		case 2:
 		{
-			auto start = chrono::system_clock::now();
-
-			//algorithmFord(matrix, startPoint, endPoint);
-
-			auto finish = chrono::system_clock::now();
-			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
-			cout << "Algorithm running time (milliseconds): " << duration << endl;
+			startAlgorithm(algorithmFord, matrix, startPoint, endPoint);
 			break;
 		}
 		case 3:
 		{
-			auto start = chrono::system_clock::now();
-
-			//algorithmFloyd(matrix, startPoint, endPoint);
-
-			auto finish = chrono::system_clock::now();
-			auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
-			cout << "Algorithm running time (milliseconds): " << duration << endl;
+			startAlgorithm(algorithmFloyd, matrix, startPoint, endPoint);
 			break;
 		}
 		case 4:
