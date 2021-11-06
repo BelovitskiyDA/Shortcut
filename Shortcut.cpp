@@ -65,8 +65,8 @@ double inputNumber(double min, double max)
 		}
 		else
 		{
-			return HUGE_VAL;
 			clearStream();
+			return HUGE_VAL;
 		}
 	}
 }
