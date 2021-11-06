@@ -10,7 +10,7 @@ using namespace std;
 
 void printMainMenu();
 void printAlgorithmMenu(int startPoint, int endPoint);
-void clearStream();
+void clearStream(istream& in = cin);
 int inputNumber(int min, int max);
 string inputFileName();
 vector<vector <double>> loadMatrix(ifstream& fin);

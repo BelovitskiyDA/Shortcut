@@ -28,10 +28,10 @@ void printAlgorithmMenu(int startPoint, int endPoint)
 		<< "Choose action: ";
 }
 
-void clearStream()
+void clearStream(istream& in)
 {
-	cin.clear();
-	cin.ignore(10000, '\n');
+	in.clear();
+	in.ignore(10000, '\n');
 }
 
 int inputNumber(int min, int max)
@@ -59,7 +59,26 @@ double inputNumber(double min, double max)
 	while (true)
 	{
 		cin >> x;
-		if(!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
+		if (!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
+		{
+			return x;
+		}
+		else
+		{
+			cout << "input number from " << min << " to " << max << ": ";
+			clearStream();
+		}
+	}
+}
+
+double inputWeight(double min, double max)
+{
+	double x = 0;
+
+	while (true)
+	{
+		cin >> x;
+		if (!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
 		{
 			return x;
 		}
@@ -84,12 +103,19 @@ vector<vector <double>> loadMatrix(ifstream& fin)
 {
 	int n;
 	fin >> n;
+	double x = 0;
 	vector<vector <double>> matrix(n, vector <double>(n));
 
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 		{
-			fin >> matrix[i][j];
+			fin >> x;
+			matrix[i][j] = x;
+			if (fin.fail())
+			{
+				matrix[i][j] = HUGE_VAL;
+				clearStream(fin);
+			}
 		}
 
 	return matrix;
@@ -132,8 +158,16 @@ vector<vector <double>> createMatrix()
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 		{
-			cout << "Element [" << i << "][" << j << "]: ";
-			matrix[i][j] = inputNumber(DBL_MIN, DBL_MAX);
+			if (i == j)
+			{
+				matrix[i][j] = 0;
+				cout << "Element [" << i << "][" << j << "]: " << matrix[i][j] << endl;
+			}
+			else
+			{
+				cout << "Element [" << i << "][" << j << "]: ";
+				matrix[i][j] = inputWeight(DBL_MIN, DBL_MAX);
+			}
 		}
 
 	return matrix;
