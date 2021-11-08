@@ -11,7 +11,7 @@ using namespace std;
 void printMainMenu();
 void printAlgorithmMenu(int startPoint, int endPoint);
 void clearStream(istream& in = cin);
-int inputNumber(int min, int max);
+
 string inputFileName();
 vector<vector <double>> loadMatrix(ifstream& fin);
 void saveMatrix(const vector<vector <double>>& matrix, ofstream& fout);

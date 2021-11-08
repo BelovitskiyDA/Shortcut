@@ -34,12 +34,17 @@ void clearStream(istream& in)
 	in.ignore(10000, '\n');
 }
 
-int inputNumber(int min, int max)
+template <typename T>
+T inputNumber(T min, T max)
 {
-	int x = 0;
+	T x = 0;
 	while (true)
 	{
 		cin >> x;
+		bool a = !cin.fail();
+		bool b = cin.peek() == '\n';
+		bool c = (min <= x);
+		bool d = (x <= max);
 		if (!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
 		{
 			return x;
@@ -48,44 +53,6 @@ int inputNumber(int min, int max)
 		{
 			cout << "input number from " << min << " to " << max << ": ";
 			clearStream();
-		}
-	}
-}
-
-double inputNumber(double min, double max)
-{
-	double x = 0;
-
-	while (true)
-	{
-		cin >> x;
-		if (!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
-		{
-			return x;
-		}
-		else
-		{
-			cout << "input number from " << min << " to " << max << ": ";
-			clearStream();
-		}
-	}
-}
-
-double inputWeight(double min, double max)
-{
-	double x = 0;
-
-	while (true)
-	{
-		cin >> x;
-		if (!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
-		{
-			return x;
-		}
-		else
-		{
-			clearStream();
-			return HUGE_VAL;
 		}
 	}
 }
@@ -111,11 +78,6 @@ vector<vector <double>> loadMatrix(ifstream& fin)
 		{
 			fin >> x;
 			matrix[i][j] = x;
-			if (fin.fail())
-			{
-				matrix[i][j] = HUGE_VAL;
-				clearStream(fin);
-			}
 		}
 
 	return matrix;
@@ -154,7 +116,7 @@ vector<vector <double>> createMatrix()
 	n = inputNumber(1, INT_MAX);
 	vector<vector <double>> matrix(n, vector <double>(n));
 
-	//need prompt about inf
+	cout << "If there is no way from i to j, then enter 0" << endl;
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 		{
@@ -166,7 +128,7 @@ vector<vector <double>> createMatrix()
 			else
 			{
 				cout << "Element [" << i << "][" << j << "]: ";
-				matrix[i][j] = inputWeight(DBL_MIN, DBL_MAX);
+				matrix[i][j] = inputNumber(-DBL_MAX, DBL_MAX);
 			}
 		}
 
