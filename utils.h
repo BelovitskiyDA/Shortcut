@@ -20,4 +20,6 @@ vector<vector <double>> createMatrix();
 int selectStartPoint(int size);
 int selectEndPoint(int size);
 int findShortcut(const vector<vector <double>>& matrix);
+void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint);
+double findmin(vector<double> array);
 

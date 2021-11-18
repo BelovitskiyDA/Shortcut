@@ -154,10 +154,10 @@ void algorithmDijkstra(vector<vector <double>> matrix, int startPoint, int endPo
 	cout << "algorithmDijkstra" << endl;
 }
 
-void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
-{
-	cout << "algorithmFord" << endl;
-}
+//void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
+//{
+//	cout << "algorithmFord" << endl;
+//}
 
 void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
 {
@@ -229,7 +229,7 @@ int main()
 {
 	vector<vector <double>> matrix;
 
-	while (true)
+	while (true) 
 	{
 		printMainMenu();
 		switch (inputNumber(0, 5))
