@@ -173,11 +173,13 @@ void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint
 	for (int k=0; k<n; k++)
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < n; j++)
-				if (matrix[i][j] > matrix[i][k] + matrix[k][j]) {
-		matrix[i][j] = matrix[i][k] + matrix[k][j];
-			cout << matrix[startPoint][endPoint];
-	}
-
+				if (matrix[i][k] < INFINITY && matrix[k][j] < INFINITY) {
+		matrix[i][j] = min (matrix[i][j], matrix[i][k] + matrix[k][j]);
+		if (matrix[i][i] < 0)
+			cout << "Алгоритм Флойда некорректно работает при наличии цикла отрицательного веса";
+		break;		}
+   cout << matrix[startPoint][endPoint];
+   printMatrix(matrix);
 }
 
 void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint, int endPoint)
