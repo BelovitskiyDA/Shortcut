@@ -175,7 +175,6 @@ void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint
 			for (int j = 0; j < n; j++)
 				if (matrix[i][j] > matrix[i][k] + matrix[k][j]) {
 		matrix[i][j] = matrix[i][k] + matrix[k][j];
-		for (int i = 0; i < n; i++)
 			cout << matrix[startPoint][endPoint];
 	}
 
