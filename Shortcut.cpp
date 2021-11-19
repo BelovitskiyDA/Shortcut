@@ -159,7 +159,7 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 	cout << "algorithmFord" << endl;
 }
 
-void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
+/*void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
 {
 	int n = size(matrix);
 	vector<vector <double>> m(n, vector <double>(n));
@@ -175,7 +175,7 @@ void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint
    printMatrix(matrix);
    cout <<" Answer= " << matrix[startPoint][endPoint] << endl;
 }
-
+*/
 void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint, int endPoint)
 {
 	auto start = chrono::system_clock::now();
