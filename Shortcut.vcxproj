@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Floid_Chernikova.cpp" />
     <ClCompile Include="Shortcut.cpp" />
   </ItemGroup>
   <ItemGroup>
