@@ -15,10 +15,10 @@ void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint
 				if (matrix[i][k] < INFINITY && matrix[k][j] < INFINITY) {
 					matrix[i][j] = min(matrix[i][j], matrix[i][k] + matrix[k][j]);
 					if (matrix[i][i] < 0) {
-						cout << "Floyd's algorithm does not work correctly in the presence of a negative weight cycle";
-						break;
+						cout << "Floyd's algorithm does not work correctly in the presence of a negative weight cycle" << endl;
+						return;
 					}
 				}
 	printMatrix(matrix);
-	cout << " Answer= " << matrix[startPoint][endPoint] << endl;
+	cout << "Answer= " << matrix[startPoint][endPoint] << endl;
 }
