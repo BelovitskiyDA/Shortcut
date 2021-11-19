@@ -160,11 +160,23 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 	cout << "algorithmFord" << endl;
 }
 
-void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
+/*void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
 {
+	int n = size(matrix);
+	vector<vector <double>> m(n, vector <double>(n));
 	cout << "algorithmFloyd" << endl;
+	for (int k=0; k<n; k++)
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++)
+				if (matrix[i][k] < INFINITY && matrix[k][j] < INFINITY) {
+		matrix[i][j] = min (matrix[i][j], matrix[i][k] + matrix[k][j]);
+		if (matrix[i][i] < 0)
+			cout << "Floyd's algorithm does not work correctly in the presence of a negative weight cycle";
+		break;		}
+   printMatrix(matrix);
+   cout <<" Answer= " << matrix[startPoint][endPoint] << endl;
 }
-
+*/
 void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint, int endPoint)
 {
 	auto start = chrono::system_clock::now();
