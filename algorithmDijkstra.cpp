@@ -37,5 +37,5 @@ void algorithmDijkstra(std::vector<std::vector <double>> matrix, int startPoint,
             }
         }
     }
-    cout << "Answer в= " << min_weight[endPoint] << endl;
+    cout << "Answer = " << min_weight[endPoint] << endl;
 }
