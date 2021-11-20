@@ -3,9 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 .DS_Store
-CMakeCache.txt
-CMakeLists.txt.user
-
+CMakeLists.txt
+cmake-build-debug
 # User-specific files
 *.rsuser
 *.suo
