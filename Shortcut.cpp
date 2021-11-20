@@ -10,6 +10,7 @@ void printMainMenu()
 		<< "[3] Save weights matrix" << endl
 		<< "[4] Print weights matrix" << endl
 		<< "[5] Finding shortcut" << endl
+		<< "[6] Run the database" << endl
 		<< "[0] Exit" << endl
 		<< "Choose action: ";
 }
@@ -159,11 +160,23 @@ void algorithmDijkstra(vector<vector <double>> matrix, int startPoint, int endPo
 //	cout << "algorithmFord" << endl;
 //}
 
-void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
+/*void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
 {
+	int n = size(matrix);
+	vector<vector <double>> m(n, vector <double>(n));
 	cout << "algorithmFloyd" << endl;
+	for (int k=0; k<n; k++)
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++)
+				if (matrix[i][k] < INFINITY && matrix[k][j] < INFINITY) {
+		matrix[i][j] = min (matrix[i][j], matrix[i][k] + matrix[k][j]);
+		if (matrix[i][i] < 0)
+			cout << "Floyd's algorithm does not work correctly in the presence of a negative weight cycle";
+		break;		}
+   printMatrix(matrix);
+   cout <<" Answer= " << matrix[startPoint][endPoint] << endl;
 }
-
+*/
 void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint, int endPoint)
 {
 	auto start = chrono::system_clock::now();
@@ -225,6 +238,13 @@ int findShortcut(const vector<vector <double>>& matrix)
 	}
 }
 
+void startAllAlgorithm(vector<vector <double>> matrix, int startPoint, int endPoint)
+{
+	startAlgorithm(algorithmDijkstra, matrix, startPoint, endPoint);
+	startAlgorithm(algorithmFord, matrix, startPoint, endPoint);
+	startAlgorithm(algorithmFloyd, matrix, startPoint, endPoint);
+}
+
 int main()
 {
 	vector<vector <double>> matrix;
@@ -232,7 +252,7 @@ int main()
 	while (true) 
 	{
 		printMainMenu();
-		switch (inputNumber(0, 5))
+		switch (inputNumber(0, 6))
 		{
 		case 1:
 		{
@@ -307,6 +327,33 @@ int main()
 			{
 				cout << "Error: matrix not create" << endl;
 			}
+			break;
+		}
+		case 6:
+		{
+			int i = 0;
+			ifstream fin;
+			bool flag = true;
+
+			while (flag)
+			{
+				string fileName = "matrix base\\" + to_string(++i);
+				fin.open(fileName, ios::in);
+				if (fin.is_open())
+				{
+					flag = fin.is_open();
+					cout << "file: " << fileName << endl;
+					matrix = loadMatrix(fin);
+					startAllAlgorithm(matrix, 0, 1);
+				}
+				else
+				{
+					cout << "Error of weights matrix load from file:" << i << endl;
+					flag = false;
+				}
+				fin.close();
+			}
+
 			break;
 		}
 		case 0:
