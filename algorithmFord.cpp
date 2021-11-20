@@ -13,7 +13,7 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 		for (int j = 0; j < n; j++)
 		{
 			if (i != j && matrix[i][j] == 0)
-				matrix[i][j] = INFINITY;
+				matrix[i][j] = std::numeric_limits<double>::infinity();
 		}
 
 	vector<double> labels(n);  // array of path lengths from each vertex to a specific one
@@ -21,7 +21,7 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 	vector<double> lambdasnew(n);  // array of shortest distances to assign
 	
 	for (int j = 0; j < n; j++)
-		lambdas[j] = INFINITY;
+		lambdas[j] = std::numeric_limits<double>::infinity();
 	lambdas[startPoint] = 0.0;  // assigned the shortest distances to infinity other than the starting one
 
 	for (int k = 1; k <= n; k++) {
@@ -43,7 +43,7 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 			flag = 0;
 			break;
 		}
-	if (lambdas[endPoint] == INFINITY && flag)
+	if (lambdas[endPoint] == std::numeric_limits<double>::infinity() && flag)
 		cout << "There is no way between point " << startPoint << " and point " << endPoint << endl;
 	else if (flag)
 	cout << "The shortest path from point " << startPoint << " to point " << endPoint << " is " << lambdas[endPoint] << endl;
@@ -53,7 +53,7 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 
 double findmin(vector<double> array)
 {
-	double min = INFINITY;
+	double min = std::numeric_limits<double>::infinity();
 	for (int i = 0; i < array.size(); i++)
 	{
 		if (min > array[i])

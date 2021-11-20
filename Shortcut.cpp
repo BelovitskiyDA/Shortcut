@@ -1,4 +1,5 @@
-﻿#include "utils.h"
+﻿#include <cfloat>
+#include "utils.h"
 
 using namespace std;
 
@@ -86,7 +87,7 @@ vector<vector <double>> loadMatrix(ifstream& fin)
 
 void saveMatrix(const vector<vector <double>>& matrix, ofstream& fout)
 {
-	int n = size(matrix);
+	int n = matrix.size();
 	fout << n << endl;
 
 	for (int i = 0; i < n; i++)
@@ -99,7 +100,7 @@ void saveMatrix(const vector<vector <double>>& matrix, ofstream& fout)
 
 void printMatrix(const vector<vector <double>>&matrix)
 {
-	int n = size(matrix);
+	int n = matrix.size();
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
@@ -150,11 +151,6 @@ int selectEndPoint(int size)
 
 using Algorithm = void(*)(vector<vector <double>> matrix, int startPoint, int endPoint);
 
-void algorithmDijkstra(vector<vector <double>> matrix, int startPoint, int endPoint)
-{
-	cout << "algorithmDijkstra" << endl;
-}
-
 //void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 //{
 //	cout << "algorithmFord" << endl;
@@ -190,7 +186,7 @@ void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint,
 
 int findShortcut(const vector<vector <double>>& matrix)
 {
-	int n = size(matrix);
+	int n = matrix.size();
 	int startPoint = selectStartPoint(n);
 	int endPoint = selectEndPoint(n);
 
@@ -281,7 +277,7 @@ int main()
 		}
 		case 3:
 		{
-			if (size(matrix))
+			if (matrix.size())
 			{
 				cout << "File name of the weights matrix save: ";
 				string fileName = inputFileName();
@@ -307,7 +303,7 @@ int main()
 		}
 		case 4:
 		{
-			if (size(matrix))
+			if (matrix.size())
 			{
 				printMatrix(matrix);
 			}
@@ -319,7 +315,7 @@ int main()
 		}
 		case 5:
 		{
-			if (size(matrix))
+			if (matrix.size())
 			{
 				findShortcut(matrix);
 			}
