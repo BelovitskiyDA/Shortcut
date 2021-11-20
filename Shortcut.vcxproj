@@ -142,6 +142,7 @@
     <ClCompile Include="Floid_Chernikova.cpp" />
     <ClCompile Include="algorithmFord.cpp" />
     <ClCompile Include="Shortcut.cpp" />
+    <ClCompile Include="algorithmFord.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h" />

@@ -21,4 +21,6 @@ int selectStartPoint(int size);
 int selectEndPoint(int size);
 void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint);
 int findShortcut(const vector<vector <double>>& matrix);
+void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint);
+double findmin(vector<double> array);
 
