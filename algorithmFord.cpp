@@ -4,7 +4,7 @@ using namespace std;
 
 void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 {
-	cout << "algorithmFord" << endl;
+	/*cout << "algorithmFord" << endl;*/
 
 	int n = matrix.size();  // the number of vertices in the graph
 	
@@ -15,6 +15,8 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 			if (i != j && matrix[i][j] == 0)
 				matrix[i][j] = std::numeric_limits<double>::infinity();
 		}
+
+	auto start = chrono::system_clock::now();
 
 	vector<double> labels(n);  // array of path lengths from each vertex to a specific one
 	vector<double> lambdas(n);  // array of shortest distances
@@ -44,11 +46,19 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 			break;
 		}
 	if (lambdas[endPoint] == std::numeric_limits<double>::infinity() && flag)
-		cout << "There is no way between point " << startPoint << " and point " << endPoint << endl;
+		cout << "Ford: error" << '\t';
+	/*cout << "There is no way between point " << startPoint << " and point " << endPoint << endl;*/
 	else if (flag)
-	cout << "The shortest path from point " << startPoint << " to point " << endPoint << " is " << lambdas[endPoint] << endl;
+		cout << "Ford: " << lambdas[endPoint] << '\t';
+		/*cout << "The shortest path from point " << startPoint << " to point " << endPoint << " is " << lambdas[endPoint] << endl;*/
 	else if (!flag)
-	cout << "The graph has a negative weight cycle." << endl;
+		cout << "Ford: error" << '\t';
+		/*cout << "The graph has a negative weight cycle." << endl;*/
+
+	auto finish = chrono::system_clock::now();
+	auto duration = chrono::duration_cast<chrono::nanoseconds>(finish - start).count(); //milliseconds nanoseconds
+	cout << "time(nanoseconds) : " << duration << '\t';
+	/*cout << duration << ", ";*/
 }
 
 double findmin(vector<double> array)

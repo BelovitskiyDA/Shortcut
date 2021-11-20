@@ -1,4 +1,5 @@
 ﻿#include <cfloat>
+#include <cmath>
 #include "utils.h"
 
 using namespace std;
@@ -12,6 +13,7 @@ void printMainMenu()
 		<< "[4] Print weights matrix" << endl
 		<< "[5] Finding shortcut" << endl
 		<< "[6] Run the database" << endl
+		<< "[7] Generation the database" << endl
 		<< "[0] Exit" << endl
 		<< "Choose action: ";
 }
@@ -151,28 +153,6 @@ int selectEndPoint(int size)
 
 using Algorithm = void(*)(vector<vector <double>> matrix, int startPoint, int endPoint);
 
-//void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
-//{
-//	cout << "algorithmFord" << endl;
-//}
-
-/*void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
-{
-	int n = size(matrix);
-	vector<vector <double>> m(n, vector <double>(n));
-	cout << "algorithmFloyd" << endl;
-	for (int k=0; k<n; k++)
-		for (int i = 0; i < n; i++)
-			for (int j = 0; j < n; j++)
-				if (matrix[i][k] < INFINITY && matrix[k][j] < INFINITY) {
-		matrix[i][j] = min (matrix[i][j], matrix[i][k] + matrix[k][j]);
-		if (matrix[i][i] < 0)
-			cout << "Floyd's algorithm does not work correctly in the presence of a negative weight cycle";
-		break;		}
-   printMatrix(matrix);
-   cout <<" Answer= " << matrix[startPoint][endPoint] << endl;
-}
-*/
 void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint, int endPoint)
 {
 	auto start = chrono::system_clock::now();
@@ -180,8 +160,10 @@ void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint,
 	f(matrix, startPoint, endPoint);
 
 	auto finish = chrono::system_clock::now();
-	auto duration = chrono::duration_cast<chrono::milliseconds>(finish - start).count();
-	cout << "Algorithm running time (milliseconds): " << duration << endl;
+	auto duration = chrono::duration_cast<chrono::nanoseconds>(finish - start).count(); //milliseconds nanoseconds
+	cout << "Function time(nanoseconds) : " << duration << endl;
+
+	/*cout << "Algorithm running time (milliseconds): " << duration << endl;*/
 }
 
 int findShortcut(const vector<vector <double>>& matrix)
@@ -248,7 +230,7 @@ int main()
 	while (true) 
 	{
 		printMainMenu();
-		switch (inputNumber(0, 6))
+		switch (inputNumber(0, 7))
 		{
 		case 1:
 		{
@@ -338,9 +320,9 @@ int main()
 				if (fin.is_open())
 				{
 					flag = fin.is_open();
-					cout << "file: " << fileName << endl;
+					cout << "file: " << fileName << "................................................................." << endl;
 					matrix = loadMatrix(fin);
-					startAllAlgorithm(matrix, 0, 1);
+					startAllAlgorithm(matrix, 0, matrix.size()-1);
 				}
 				else
 				{
@@ -348,6 +330,43 @@ int main()
 					flag = false;
 				}
 				fin.close();
+			}
+
+			break;
+		}
+		case 7:
+		{
+			ofstream fout;
+
+			for (int k = 4; k <= 80; k++)
+			{
+				int n = k;
+				vector<vector <double>> matrix(n, vector <double>(n));
+				for (int i = 0; i < n; i++)
+					for (int j = 0; j < n; j++)
+					{
+						if (i == j)
+						{
+							matrix[i][j] = 0;
+						}
+						else
+						{
+							matrix[i][j] = rand();
+						}
+					}
+
+				
+				fout.open("matrix base\\" + to_string(k+3), ios::out);
+				if (fout.is_open())
+				{
+					saveMatrix(matrix, fout);
+					cout << k << " Successfull save" << endl;
+				}
+				else
+				{
+					cout << k <<  " Error of weights matrix save." << endl;
+				}
+				fout.close();
 			}
 
 			break;

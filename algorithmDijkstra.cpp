@@ -5,20 +5,24 @@
 #include <queue>
 
 void algorithmDijkstra(std::vector<std::vector <double>> matrix, int startPoint, int endPoint){
-    std::cout << "Dijkstra's algorithm start: " << std::endl;
+    /*std::cout << "Dijkstra's algorithm start: " << std::endl;*/
     std::size_t n = matrix.size();
     std::vector<double> min_weight(n, numeric_limits<double>::infinity());
     min_weight[startPoint] = 0;
     for (std::size_t i = 0; i < n; ++i){
         for (std::size_t j = 0; j < n; ++j){
             if (matrix[i][j] < 0){
-                std::cout << "Dijkstra's algorithm works only for graphs without edges of negative weight" << std::endl;
+                /*std::cout << "Dijkstra's algorithm works only for graphs without edges of negative weight" << std::endl;*/
+                std::cout << "Dijkstra: error" << '\t';
                 return;
             }else if(matrix[i][j] == 0){
                 matrix[i][j] = numeric_limits<double>::infinity();
             }
         }
     }
+
+    auto start = chrono::system_clock::now();
+
     priority_queue<pair <double, int>> q_vertices;
     q_vertices.push({0, startPoint});
     while(!q_vertices.empty()){
@@ -37,5 +41,11 @@ void algorithmDijkstra(std::vector<std::vector <double>> matrix, int startPoint,
             }
         }
     }
-    cout << "Answer = " << min_weight[endPoint] << endl;
+    /*cout << "Answer = " << min_weight[endPoint] << endl;*/
+    cout << "Dijkstra: " << min_weight[endPoint] << '\t';
+
+    auto finish = chrono::system_clock::now();
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(finish - start).count(); //milliseconds nanoseconds
+    cout << "time(nanoseconds) : " << duration << '\t';
+    /*cout << duration << ", ";*/
 }
