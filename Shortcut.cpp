@@ -1,5 +1,6 @@
 ﻿#include <cfloat>
-#include <cmath>
+#include <fstream>
+#include <stack>
 #include "utils.h"
 
 using namespace std;
@@ -32,7 +33,7 @@ void printAlgorithmMenu(int startPoint, int endPoint)
 		<< "Choose action: ";
 }
 
-void clearStream(istream& in)
+void clearStream(istream& in = cin)
 {
 	in.clear();
 	in.ignore(10000, '\n');
@@ -153,6 +154,10 @@ int selectEndPoint(int size)
 
 using Algorithm = void(*)(vector<vector <double>> matrix, int startPoint, int endPoint);
 
+void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint);
+void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint);
+void algorithmDijkstra(vector<vector <double>> matrix, int startPoint, int endPoint);
+
 void startAlgorithm(Algorithm f, vector<vector <double>> matrix, int startPoint, int endPoint)
 {
 	auto start = chrono::system_clock::now();
@@ -221,6 +226,47 @@ void startAllAlgorithm(vector<vector <double>> matrix, int startPoint, int endPo
 	startAlgorithm(algorithmDijkstra, matrix, startPoint, endPoint);
 	startAlgorithm(algorithmFord, matrix, startPoint, endPoint);
 	startAlgorithm(algorithmFloyd, matrix, startPoint, endPoint);
+}
+
+
+void findWay(vector<vector <double>>& matrix, vector<double>& vectWeight, int startPoint, int endPoint)
+{
+	stack <int> way;
+	int workPoint = endPoint;
+	int n = matrix.size();
+	int k = 0;
+	way.push(endPoint);
+	double weight = vectWeight[endPoint];
+	while (workPoint != startPoint && k <= n)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			if (matrix[i][workPoint] != 0 && matrix[i][workPoint] != numeric_limits<double>::infinity())
+			{
+
+				if (weight - matrix[i][workPoint] == vectWeight[i])
+				{
+					weight = weight - matrix[i][workPoint];
+					workPoint = i;
+					way.push(workPoint);
+					
+				}
+			}
+		}
+		k++;
+	}
+
+	if (k > n)
+		cout << "error find way" << '\t';
+	else
+	{
+		while (!way.empty())
+		{
+			cout << way.top() << " ";
+			way.pop();
+		}
+		cout << '\t';
+	}
 }
 
 int main()

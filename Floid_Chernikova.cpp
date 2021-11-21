@@ -1,6 +1,9 @@
 #include "utils.h"
+
 void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint)
 {
+	vector<vector <double>> copyMatrix = matrix;
+
 	int n = matrix.size();
 	for (int i = 0; i < n; i++)      
 		for (int j = 0; j < n; j++)
@@ -31,4 +34,6 @@ void algorithmFloyd(vector<vector <double>> matrix, int startPoint, int endPoint
 	auto duration = chrono::duration_cast<chrono::nanoseconds>(finish - start).count(); //milliseconds nanoseconds
 	cout << "time(nanoseconds) : " << duration << '\t';
 	/*cout << duration << endl;*/
+
+	findWay(copyMatrix, matrix[startPoint], startPoint, endPoint);
 }

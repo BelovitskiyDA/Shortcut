@@ -48,4 +48,6 @@ void algorithmDijkstra(std::vector<std::vector <double>> matrix, int startPoint,
     auto duration = chrono::duration_cast<chrono::nanoseconds>(finish - start).count(); //milliseconds nanoseconds
     cout << "time(nanoseconds) : " << duration << '\t';
     /*cout << duration << ", ";*/
+
+    findWay(matrix, min_weight, startPoint, endPoint);
 }

@@ -1,6 +1,7 @@
 #include "utils.h"
 
 using namespace std;
+double findmin(vector<double> array);
 
 void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 {
@@ -47,7 +48,7 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 		}
 	if (lambdas[endPoint] == std::numeric_limits<double>::infinity() && flag)
 		cout << "Ford: error" << '\t';
-	/*cout << "There is no way between point " << startPoint << " and point " << endPoint << endl;*/
+		/*cout << "There is no way between point " << startPoint << " and point " << endPoint << endl;*/
 	else if (flag)
 		cout << "Ford: " << lambdas[endPoint] << '\t';
 		/*cout << "The shortest path from point " << startPoint << " to point " << endPoint << " is " << lambdas[endPoint] << endl;*/
@@ -59,6 +60,8 @@ void algorithmFord(vector<vector <double>> matrix, int startPoint, int endPoint)
 	auto duration = chrono::duration_cast<chrono::nanoseconds>(finish - start).count(); //milliseconds nanoseconds
 	cout << "time(nanoseconds) : " << duration << '\t';
 	/*cout << duration << ", ";*/
+
+	findWay(matrix, lambdas, startPoint, endPoint);
 }
 
 double findmin(vector<double> array)
