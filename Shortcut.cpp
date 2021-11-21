@@ -383,8 +383,9 @@ int main()
 		case 7:
 		{
 			ofstream fout;
-
-			for (int k = 4; k <= 80; k++)
+			cout << "enter max num of vertex: ";
+			int numVertex = inputNumber(4, 150);
+			for (int k = 4; k <= numVertex; k++)
 			{
 				int n = k;
 				vector<vector <double>> matrix(n, vector <double>(n));
@@ -402,7 +403,7 @@ int main()
 					}
 
 				
-				fout.open("matrix base\\" + to_string(k+3), ios::out);
+				fout.open("matrix base\\" + to_string(k+4), ios::out);
 				if (fout.is_open())
 				{
 					saveMatrix(matrix, fout);
