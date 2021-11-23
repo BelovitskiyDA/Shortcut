@@ -46,10 +46,6 @@ T inputNumber(T min, T max)
 	while (true)
 	{
 		cin >> x;
-		bool a = !cin.fail();
-		bool b = cin.peek() == '\n';
-		bool c = (min <= x);
-		bool d = (x <= max);
 		if (!cin.fail() && cin.peek() == '\n' && (min <= x && x <= max))
 		{
 			return x;
